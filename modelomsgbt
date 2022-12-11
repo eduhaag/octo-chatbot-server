@@ -1,0 +1,29 @@
+const body = content[0].body;
+const title = content[0].title;
+const footer = content[0].footer;
+const id1 = content[0].id;
+const btn1 = content[0].btn1;
+
+try {
+    await delay(timeWait)
+} catch (error) {
+    console.log("Erro no evento: 'send_1button > delay'. Erro -> ", error)
+}
+try {
+    await client.sendMessageOptions(to_whatsapp, body, {
+        title: title,
+        footer: footer,
+        isDynamicReplyButtonsMsg: true,
+        dynamicReplyButtons: [
+            {
+                "buttonId": id1,
+                "buttonText": {
+                    "displayText": btn1
+                },
+                "type": 1
+            }
+        ],
+    })
+} catch (error) {
+    console.log("Erro no evento: 'send_1button > client.sendMessageOptions'. Erro -> ", error)
+}
