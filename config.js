@@ -1,6 +1,6 @@
 export const provaDeVidaConfig = {
-  ciclo: 30000,
-  envioMsgProvaDeVida: 30,
-  encerraChatSemInteracao: 90,
+  ciclo: 180000,
+  envioMsgProvaDeVida: 180,
+  encerraChatSemInteracao: 360,
   numeroProvaVida: 1
 };

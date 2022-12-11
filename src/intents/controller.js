@@ -30,6 +30,7 @@ export default function intentController(client, usersStages, message){
 
   // define ultima interação
   user['timestamp']=Date.now();
+  user['provaVida']=0;
 
   switch(user.stage){
     case 'nome':
