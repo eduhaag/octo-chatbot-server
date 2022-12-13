@@ -1,8 +1,7 @@
-import {senderText} from '../sender.js'
+import {senderText} from '../services/sender.js'
 
-export default function setName(client, messageTo, user, botConfig){
-  const {name} = botConfig;
+export default function setName(client, messageTo, user){
   const userName = user.name;
 
-  senderText(client, messageTo, `${name} Ótimo, obrigada ${userName}.`)
+  senderText(client, messageTo, `Ótimo, obrigada ${userName}.`)
 }

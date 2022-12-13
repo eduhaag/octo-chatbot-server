@@ -1,9 +1,7 @@
-import { senderText } from "../sender.js";
+import { senderText } from "../services/sender.js";
 
-export default function aguardando(client, messageTo, user, botConfig){
-  const {name} = botConfig;
+export default function aguardando(client, messageTo, user){
   const userName = user.name;
 
-  senderText(client, messageTo, `${name} ${userName} sua mensagem já foi repassada para um atendende. Responderemos o mais rápido o possível.\nGrata pela compreensão.`)
-  user['timestamp']=Date.now();
+  senderText(client, messageTo, `${userName} sua mensagem já foi repassada para um atendende. Responderemos o mais rápido o possível.\nGrata pela compreensão.`)
 }

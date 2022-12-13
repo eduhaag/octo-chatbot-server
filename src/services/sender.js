@@ -1,7 +1,11 @@
+import {botConfig} from '../config.js'
+
+const {botEmoji, botName} = botConfig
+
 function senderText(client, sendTo, text, intervalo=0){
   setTimeout(()=>{
     client
-    .sendText(sendTo, text)
+    .sendText(sendTo, `*${botEmoji} ${botName}:* ${text}`)
     .then((result) => {
       console.log("RESPONDIDO");
     })
@@ -12,20 +16,10 @@ function senderText(client, sendTo, text, intervalo=0){
 }
 
 function senderMenu(client, sendTo, msgBody, menu, intervalo=0){
-  /* Bottons format:
-      {
-        "buttonId": id1,
-        "buttonText": {
-          "displayText": btn1
-        },
-        "type": 1
-      }
-  */
-
-  const {title, footer, buttons} = menu;
+   const {title, footer, buttons} = menu;
   setTimeout(()=>{
     client
-    .sendMessageOptions(sendTo, msgBody, {
+    .sendMessageOptions(sendTo, `*${botEmoji} ${botName}:* ${msgBody}`, {
       title,
       footer,
       isDynamicReplyButtonsMsg: true,

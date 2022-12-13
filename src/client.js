@@ -1,5 +1,5 @@
 import intentController from './intents/controller.js';
-import provaDeVida from './provaDeVida.js';
+import provaDeVida from './services/provaDeVida.js';
 
 var chats=[];
 

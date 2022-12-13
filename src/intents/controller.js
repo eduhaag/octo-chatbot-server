@@ -9,10 +9,6 @@ import finaliza from "./finaliza.js";
 import duvida from "./duvida.js";
 import aguardando from "./aguardando.js";
 
-var botConfig={
-  name: '*👩🏻‍🦱 Nice:*',
-  shortName:'*Nice*'
-}
 
 //stages: welcome >> nome >> menu >> Fim
 export default function intentController(client, usersStages, message){
@@ -20,7 +16,7 @@ export default function intentController(client, usersStages, message){
   user = user ? user : {stage:undefined};
 
   if(message.mimetype){
-    client.sendText(message.from, '*👩🏻‍🦱 Nice:* Desculpe, ainda não aprendi a lidar com esse tipo de mensagem, favor escrever sua mensagem.');
+    client.sendText(message.from, 'Desculpe, ainda não aprendi a lidar com esse tipo de mensagem, favor escrever sua mensagem.');
     return;
   }
 
@@ -28,56 +24,53 @@ export default function intentController(client, usersStages, message){
     return;
   }
 
-  // define ultima interação
-  user['timestamp']=Date.now();
-  user['provaVida']=0;
+
 
   switch(user.stage){
     case 'nome':
       user['name'] = message.body;
-      setName(client, message.from, user, botConfig);
-      menu(client, message.from, user, botConfig);
+      setName(client, message.from, user);
+      menu(client, message.from, user);
       user['stage'] = 'menu'
       break;
 
     case 'menu':
-      menuController(client, message, user, botConfig);
+      menuController(client, message, user);
       break;
 
     case 'produto':
       const mensagem = message.body;
       if(mensagem==='Sim'){
-        entrega(client, message.from, user, botConfig);
+        entrega(client, message.from, user);
       }else if(mensagem==='Não'){
-        finaliza(client,message.from, usersStages, user, botConfig);
+        finaliza(client,message.from, usersStages, user);
       }else{
-        menu(client,message.from, user, botConfig);
+        menu(client,message.from, user);
       }
       break;
 
     case 'entrega':
       const msg = message.body;
       if(msg==='Sim'){
-        entrega(client, message.from, user, botConfig);
+        entrega(client, message.from, user);
       }else if(msg==='Não'){
-        finaliza(client,message.from, usersStages, user, botConfig);
+        finaliza(client,message.from, usersStages, user);
       }else{
-        menu(client,message.from, user, botConfig);
+        menu(client,message.from, user);
       }
 
       break;
 
     case 'duvida':
-      duvida(client, message.from, user, botConfig);
+      duvida(client, message.from, user);
       setTimeout(()=>{
         client.markUnseenMessage(message.from);
       },2000);
       break;
 
     case 'aguardando':
-
       if(differenceInSeconds(Date.now(),user['timestamp'])>=300){
-        aguardando(client, message.from, user, botConfig);
+        aguardando(client, message.from, user);
       };
       setTimeout(()=>{
         client.markUnseenMessage(message.from);
@@ -85,8 +78,7 @@ export default function intentController(client, usersStages, message){
       break;
 
     default: //welcome
-      console.log('*Usuário atual* from:' + message.from);
-      welcome(client, message.from, user, botConfig)
+      welcome(client, message.from, user)
       const newUser = {
         stage: 'nome',
         name: undefined,
@@ -97,4 +89,8 @@ export default function intentController(client, usersStages, message){
       usersStages.push(newUser);
       break;
   }
+
+  // define ultima interação
+    user['timestamp']=Date.now();
+    user['provaVida']=0;
 }

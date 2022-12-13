@@ -54,8 +54,11 @@ wppconnect
         }
       )
     },
-    autoClose: false,
     puppeteerOptions: { args: ["--no-sandbox"] },
+    onLoadingScreen: (percent, message)=>{
+      console.log('loading Screen', percent, message)
+    },
+    debug: true
   })
   .then((cliente) =>{
     client = cliente;
